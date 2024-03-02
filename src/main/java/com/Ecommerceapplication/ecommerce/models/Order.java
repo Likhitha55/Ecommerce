@@ -21,5 +21,5 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    User user;
+    AppUser appUser;
 }

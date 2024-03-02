@@ -1,9 +1,8 @@
 package com.Ecommerceapplication.ecommerce.Controller;
 
-//import com.Ecommerceapplication.ecommerce.DTO.UserReqDTO;
-import com.Ecommerceapplication.ecommerce.Repository.UserRepo;
-import com.Ecommerceapplication.ecommerce.Service.UserService;
-import com.Ecommerceapplication.ecommerce.models.User;
+import com.Ecommerceapplication.ecommerce.Repository.AppUserRepo;
+import com.Ecommerceapplication.ecommerce.Service.AppUserService;
+import com.Ecommerceapplication.ecommerce.models.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class AppUserController {
     @Autowired
-    UserService userService;
+    AppUserService appUserService;
     @Autowired
-    UserRepo userRepo;
+    AppUserRepo userRepo;
     @PostMapping("/add-user")
-    public ResponseEntity<String> addUser(@RequestBody User u){
-        userService.addUser(u);
+    public ResponseEntity<String> addAppUser(@RequestBody AppUser u){
+        appUserService.addAppUser(u);
 //        User user = new User();
 //        user.setId(userDto.getId());
 //        user.setName((userDto.getName()));

@@ -13,13 +13,13 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class User {
+public class AppUser {
     @Id
     int id;
     String name;
     String email;
     String password;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "appUser",cascade = CascadeType.ALL)
     List<Order> order = new ArrayList<>();
 }
