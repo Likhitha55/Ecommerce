@@ -1,11 +1,10 @@
 package com.Ecommerceapplication.ecommerce.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,4 +19,7 @@ public class User {
     String name;
     String email;
     String password;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<Order> order = new ArrayList<>();
 }

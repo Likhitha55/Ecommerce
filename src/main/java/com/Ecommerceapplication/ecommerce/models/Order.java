@@ -1,9 +1,6 @@
 package com.Ecommerceapplication.ecommerce.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -16,11 +13,13 @@ import java.util.List;
 @ToString
 public class Order {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     int id;
 
-    @ManyToOne
-    User user;
-
-    @OneToMany
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     List<Product> products;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    User user;
 }
