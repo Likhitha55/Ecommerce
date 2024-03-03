@@ -2,11 +2,14 @@ package com.Ecommerceapplication.ecommerce.Controller;
 
 //import com.Ecommerceapplication.ecommerce.DTO.ProductDTO;
 import com.Ecommerceapplication.ecommerce.Repository.ProductRepo;
+import com.Ecommerceapplication.ecommerce.Repository.UserOrderRepo;
 import com.Ecommerceapplication.ecommerce.Service.ProductService;
 import com.Ecommerceapplication.ecommerce.models.Product;
+import com.Ecommerceapplication.ecommerce.models.UserOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,6 +19,8 @@ public class ProductController {
     ProductService productService;
     @Autowired
     ProductRepo productRepo;
+    @Autowired
+    UserOrderRepo userOrderRepo;
 
     @PostMapping("/add-product")
     public void addProduct(@RequestBody Product p){
@@ -36,4 +41,6 @@ public class ProductController {
     public Product getMostOrderedProduct(){
         return productService.getMostOrderedProduct();
     }
+
+
 }

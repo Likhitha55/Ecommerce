@@ -1,7 +1,9 @@
 package com.Ecommerceapplication.ecommerce.Service;
 
 import com.Ecommerceapplication.ecommerce.Repository.ProductRepo;
+import com.Ecommerceapplication.ecommerce.Repository.UserOrderRepo;
 import com.Ecommerceapplication.ecommerce.models.Product;
+import com.Ecommerceapplication.ecommerce.models.UserOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     ProductRepo productRepo;
+    @Autowired
+    UserOrderRepo userOrderRepo;
     public void addProduct(Product p){
         Product product = new Product();
         product.setProductName(p.getProductName());
@@ -41,12 +45,29 @@ public class ProductService {
 
     }
     public Product getMostOrderedProduct(){
-        List<Product> allProducts = productRepo.findAll();
-        Product pro = null;
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        for(Product p : allProducts){
-            
+        List<UserOrder> allOrders = userOrderRepo.findAll();
+//        List<List<Product>> allProductsList = null;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(UserOrder order : allOrders){
+            List<Product> products = order.getProducts();
+            for(Product p : products){
+                map.put(p.getProductId(), map.getOrDefault(p.getProductId(),0)+1);
+            }
         }
-        return pro;
+        int maxCount = Integer.
+                MIN_VALUE;
+        Product maxOrderedProduct = new Product();
+        for(int id : map.keySet()){
+            int curr = map.get(id);
+            if(curr > maxCount){
+                maxCount = curr;
+                maxOrderedProduct = productRepo.findById(map.get(curr)).orElse(null);
+            }else if(curr == maxCount){
+                if(productRepo.findById(id).orElse(null).getPrice() >= productRepo.findById(maxOrderedProduct.getProductId()).orElse(null).getPrice()){
+                    maxOrderedProduct = productRepo.findById(map.get(curr)).orElse(null);
+                }
+            }
+        }
+        return maxOrderedProduct;
     }
 }
