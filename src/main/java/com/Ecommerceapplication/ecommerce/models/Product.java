@@ -19,7 +19,7 @@ public class Product {
     String category;
     double price;
 
-    @ManyToOne
-    @JoinColumn(name="order_id")
-    Order order;
+//    @ManyToOne
+//    @JoinColumn(name="order_id")
+//    UserOrder userOrder;
 }

@@ -1,5 +1,6 @@
 package com.Ecommerceapplication.ecommerce.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,7 @@ public class AppUser {
     String name;
     String email;
     String password;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "appUser",cascade = CascadeType.ALL)
-    List<Order> order = new ArrayList<>();
+    List<UserOrder> order;
 }
